@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>My First JavaScript</h1>
+<textarea id="w3review" name="w3review" rows="20" cols="50"></textarea>
+<button type="button"
+onclick="document.getElementById('demo').innerHTML = myFunction()">
+Click me to OutPut.</button>
+<h1>OutPut:</h1>
+<p id="demo"></p>
+<script>
+function myFunction() {
+var str=document.getElementById('w3review').value;
+var x,y;
+var truc="x";
+var move=0;
+var res = str.split("\n");
+
+console.log(res[0].split(","));
+var trucX=parseInt(res[0].split(",")[0].replace("PLACE","").trim());
+var trucY=parseInt(res[0].split(",")[1]);
+var pos;
+console.log(res[0].split(",")[2].trim());
+if(res[0].split(",")[2].trim()=="EAST")
+{
+	truc="x";
+	move=1;
+}
+if(res[0].split(",")[2].trim()=="NORTH")
+{
+	truc="y";
+	move=1;
+}
+if(res[0].split(",")[2].trim()=="SOUTH")
+{
+	truc="y";
+	move=-1;
+}
+if(res[0].split(",")[2].trim()=="WEST")
+{
+	truc="x";
+	move=-1;
+}
+console.log("befor move\n");
+console.log("truc x:"+trucX);
+console.log("truc y:"+trucY);
+console.log("truc:"+truc);
+console.log("move:"+move);
+var text;
+for (i = 1; i < res.length-1; i++) {
+	
+	if(trucX>5||trucY>5)
+		return "OUTMOVE";
+	if(res[i].includes("MOVE"))
+	{
+	console.log("MOVE");
+		if(truc=="x")
+			trucX+=move;
+		if(truc=="y")
+			trucY+=move;
+	}
+	if(res[i].includes("LEFT"))
+	{
+		console.log("LEFT");
+		
+		switch(truc)
+		{
+		case 'x':
+			switch(move)
+			{
+				case 1:
+					truc="y";
+					move=1;
+					break;
+				case -1:
+					truc="y";
+					move=-1;
+					break;
+			}			
+			break;
+		case 'y':
+			switch(move)
+			{
+				case 1:
+					truc="x";
+					move=-1;
+					break;
+				case -1:
+					truc="x";
+					move=1;
+					break;
+			}	
+			
+			break;
+		}
+		console.log("truc:"+truc);
+		console.log("move:"+move);
+	}
+	if(res[i].includes("RIGHT"))
+	{
+		console.log("RIGHT");
+		
+		switch(truc)
+		{
+		case 'x':
+			switch(move)
+			{
+				case 1:
+					truc="y";
+					move=-1;
+					break;
+				case -1:
+					truc="y";
+					move=1;
+					break;
+			}			
+			break;
+		case 'y':
+			switch(move)
+			{
+				case 1:
+					truc="x";
+					move=1;
+					break;
+				case -1:
+					truc="x";
+					move=-1;
+					break;
+			}	
+			
+			break;
+		}
+		console.log("truc:"+truc);
+		console.log("move:"+move);
+	}
+  text += res[i] + "<br>";
+}
+switch(truc)
+		{
+		case 'x':
+			switch(move)
+			{
+				case 1:
+					pos="EAST"
+					break;
+				case -1:
+					pos="WEST"
+					break;
+			}			
+			break;
+		case 'y':
+			switch(move)
+			{
+				case 1:
+					pos="NORTH"					
+					break;
+				case -1:
+					pos="SOUTH"
+					break;
+			}	
+			
+			break;
+		}
+console.log("after move\n");
+console.log("truc x:"+trucX);
+console.log("truc y:"+trucY);
+console.log("pos:"+pos);
+console.log(text);
+	if(res[i].includes("REPORT"))
+	{
+		return trucX+","+trucY+","+pos;
+	}
+return document.getElementById('w3review').value;
+}
+
+</script>
+</body>
+</html> 
